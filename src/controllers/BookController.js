@@ -9,10 +9,17 @@ const getAllBooks = () => books;
 
 const getBookById = (id) => books.find(b => b.id === id);
 
+// Added on develop branch: delete a book
 const addBook = (title, author) => {
   const book = new Book(books.length + 1, title, author);
   books.push(book);
   return book;
+};
+
+const deleteBook = (id) => {
+  const index = books.findIndex(b => b.id === id);
+  if (index === -1) throw new Error('Book not found');
+  return books.splice(index, 1)[0];
 };
 
 const borrowBook = (id, memberName) => {
@@ -27,4 +34,4 @@ const returnBook = (id) => {
   return book.returnBook();
 };
 
-module.exports = { getAllBooks, getBookById, addBook, borrowBook, returnBook };
+module.exports = { getAllBooks, getBookById, addBook, deleteBook, borrowBook, returnBook };
