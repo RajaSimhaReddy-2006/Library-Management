@@ -15,4 +15,16 @@ const addBook = (title, author) => {
   return book;
 };
 
-module.exports = { getAllBooks, getBookById, addBook };
+const borrowBook = (id, memberName) => {
+  const book = getBookById(id);
+  if (!book) throw new Error('Book not found');
+  return book.borrow(memberName);
+};
+
+const returnBook = (id) => {
+  const book = getBookById(id);
+  if (!book) throw new Error('Book not found');
+  return book.returnBook();
+};
+
+module.exports = { getAllBooks, getBookById, addBook, borrowBook, returnBook };
